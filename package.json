@@ -18,5 +18,7 @@
     "redux-thunk": "^2.2.0",
     "request": "^2.79.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-easy": "^0.1.3"
+  }
 }
