@@ -1,0 +1,12 @@
+{
+    "profiles": {
+        "chat": {
+            "message": {
+                "serverModel": "app\\chat\\models\\Message",
+                "match": {
+                    "groupId": "groupId"
+                }
+            }
+        }
+    }
+}

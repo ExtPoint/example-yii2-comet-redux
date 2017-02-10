@@ -1,0 +1,6 @@
+{
+    "basePath": "..",
+    "includes": [
+        "chat/bindings.json"
+    ]
+}
