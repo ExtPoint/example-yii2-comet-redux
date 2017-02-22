@@ -67,6 +67,7 @@ export default class FileItem extends React.Component {
                             )}
                             {!this.props.file.isResultError() && (
                                 <span>
+                                    &nbsp;
                                     {FileItem.asHumanFileSize(this.props.file.getBytesTotal())}
                                 </span>
                             )}
