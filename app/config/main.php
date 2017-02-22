@@ -54,5 +54,23 @@ return [
             'class' => '\extpoint\megamenu\MegaMenu',
         ],
     ],
-    'modules' => \extpoint\yii2\components\ModuleLoader::getConfig(dirname(__DIR__)),
+    'modules' => \yii\helpers\ArrayHelper::merge(
+        \extpoint\yii2\components\ModuleLoader::getConfig(dirname(__DIR__)),
+        [
+            'file' => [
+                'processors' => [
+                    'chat_thumbnail' => [
+                        'class' => '\app\file\processors\ImageResize',
+                        'width' => 300,
+                        'height' => 200,
+                    ],
+                    'chat_full' => [
+                        'class' => '\app\file\processors\ImageResize',
+                        'width' => 1200,
+                        'height' => 800,
+                    ],
+                ],
+            ],
+        ]
+    ),
 ];

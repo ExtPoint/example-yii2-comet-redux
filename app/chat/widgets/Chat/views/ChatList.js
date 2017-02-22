@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import jii from 'jii';
 import moment from 'moment';
+import Gallery from 'react-grid-gallery';
 
 import {update} from '../actions/comet';
 import {getCollection} from '../reducers/comet';
@@ -63,6 +64,11 @@ class ChatList extends React.Component {
                     <p>
                         {message.text}
                     </p>
+                    <Gallery
+                        images={message.photos}
+                        rowHeight={100}
+                        enableImageSelection={false}
+                    />
                 </div>
             </div>
         );

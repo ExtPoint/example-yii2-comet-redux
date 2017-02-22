@@ -2,8 +2,10 @@
 
 namespace app\chat\controllers;
 
+use app\comet\CometModule;
 use Yii;
 use app\chat\models\Message;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class ChatController extends Controller
@@ -20,10 +22,6 @@ class ChatController extends Controller
         $message->saveOrPanic();
 
         Yii::$app->session->set('userName', $message->userName);
-    }
-
-    public function actionLoad() {
-        return json_encode(CometModule::getInstance()->neat->server->loadDataLocally(json_decode($_POST['msg'], true)));
     }
 
 }

@@ -22,7 +22,7 @@ class FileModule extends AppModule {
 	 * From 0 to 100 percents
 	 * @var string
 	 */
-	public $thumbQuality = 90;
+	public $thumbQuality = 95;
 
 	/**
 	 * Absolute path to root user files dir
@@ -66,7 +66,7 @@ class FileModule extends AppModule {
 					'height' => 1200
 				],
 				self::PROCESSOR_NAME_DEFAULT => [
-					'class' => '\app\file\processors\ImageResize',
+					'class' => '\app\file\processors\ImageCropResize',
 					'width' => 100,
 					'height' => 100
 				]

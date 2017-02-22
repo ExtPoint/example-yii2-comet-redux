@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 
 import {send} from '../actions/chat';
+import FileInput from '../../../../file/widgets/FileInput/FileInput';
 
 class ChatForm extends React.Component {
 
@@ -46,6 +47,14 @@ class ChatForm extends React.Component {
                         placeholder=''
                     />
                 </div>
+                <div className='form-group'>
+                    <Field
+                        name='photoUids'
+                        component={FileInput}
+                        buttonLabel='Прикрепить фотографии'
+                        multiple
+                    />
+                </div>
                 <Field
                     name='groupId'
                     component='input'
@@ -62,8 +71,9 @@ class ChatForm extends React.Component {
     }
 
     _onSubmit(values) {
-        if (values.text) {
+        if (values.text || values.photoUids.length > 0) {
             this.props.change('text', '');
+            this.props.change('photoUids', []);
             return send(values);
         }
     }
