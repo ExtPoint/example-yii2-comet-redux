@@ -37,7 +37,7 @@
         "requireReturnDescription": false
       }
     ],
-    "no-lonely-if": "warn",
+    "no-lonely-if": "off", // What's the reason in such rule?
     "no-multiple-empty-lines": "warn",
     "curly": [ "error", "all" ],
     "no-duplicate-case": "error",

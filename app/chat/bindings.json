@@ -5,7 +5,9 @@
                 "serverModel": "app\\chat\\models\\Message",
                 "match": {
                     "groupId": "groupId"
-                }
+                },
+                "limitParam": "limit",
+                "limitOrder": ["id", "DESC"]
             }
         }
     }

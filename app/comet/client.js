@@ -23,13 +23,19 @@ const app = jii.createWebApplication(jii.mergeConfigs(
                     engine: {
                         className: NeatComet.NeatCometClient,
                         createCollection: () => ({
+                            desc: false, // TODO: Push settings from NeatComet
                             items: [],
                             callback: () => {}
                         }),
                         callCollection: (collection, method, param1, param2) => {
                             switch (method) {
                                 case 'add':
-                                    collection.items.push(param1);
+                                    if (collection.desc) {
+                                        collection.items.unshift(param1);
+                                    }
+                                    else {
+                                        collection.items.push(param1);
+                                    }
                                     break;
 
                                 case 'reset':
@@ -41,8 +47,13 @@ const app = jii.createWebApplication(jii.mergeConfigs(
                                     const index = collection.items.findIndex(item => item.id === param2);
                                     if (index !== -1) {
                                         collection.items.splice(index, 1, param1);
-                                    } else {
-                                        collection.items.push(param1);
+                                    } else { // Actually here should be a warning, not add
+                                        if (collection.desc) {
+                                            collection.items.unshift(param1);
+                                        }
+                                        else {
+                                            collection.items.push(param1);
+                                        }
                                     }
                                     break;
 

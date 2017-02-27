@@ -30,11 +30,15 @@ class ChatList extends React.Component {
         jii.app.promise.then(() => {
             const profile = jii.app.neat.openProfile(ChatList.profileId, {
                 groupId: this.props.groupId,
+                limit: this.props.pageSize,
             });
             const collection = profile.getCollection(ChatList.bindingId);
+            collection.desc = true;
             collection.callback = items => {
                 this.props.dispatch(update(ChatList.profileId, ChatList.bindingId, items));
             };
+
+            this.profile = profile;
         });
     }
 
@@ -42,7 +46,11 @@ class ChatList extends React.Component {
         return (
             <div>
                 <br />
-                {[].concat(this.props.messages).reverse().map(message => this.renderItem(message))}
+                {[].concat(this.props.messages).map(message => this.renderItem(message))}
+                <span className='btn btn-success' onClick={() => this.profile.updateParams({
+                    groupId: this.props.groupId,
+                    limit: [this.limit = ((this.limit || 0) + this.props.pageSize), this.props.pageSize],
+                })}>next</span>
             </div>
         );
     }
