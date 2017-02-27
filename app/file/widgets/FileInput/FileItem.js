@@ -1,9 +1,11 @@
 import React, {PropTypes} from 'react';
+import File from 'fileup-core/lib/models/File';
+import FilePropType from 'fileup-redux/lib/types/FilePropType';
 
 export default class FileItem extends React.Component {
 
     static propTypes = {
-        file: PropTypes.object,
+        file: FilePropType,
         onRemove: PropTypes.func
     };
 
@@ -40,47 +42,47 @@ export default class FileItem extends React.Component {
                 <div className='media'>
                     {this._renderPreview()}
                     <div className='media-body'>
-                        {this.props.file.isStatusEnd() && (
+                        {this.props.file.status === File.STATUS_END && (
                             <button
                                 type='button'
                                 className='btn btn-sm btn-default pull-right'
                                 onClick={() => this.props.onRemove()}
                             >
-                                <span className='glyphicon glyphicon-remove' z/>
+                                <span className='glyphicon glyphicon-remove' />
                             </button>
                         )}
                         <h4 className='media-heading'>
-                            {this.props.file.getName()}
+                            {this.props.file.name}
                         </h4>
-                        {this.props.file.isResultError() && (
+                        {this.props.file.result === File.RESULT_ERROR && (
                             <p>
-                                Ошибка: {this.props.file.getResultHttpMessage()['error']}
+                                Ошибка: {this.props.file.resultHttpMessage.error}
                             </p>
                         )}
                         <p>
-                            {this.props.file.isStatusProcess() && (
+                            {this.props.file.status === File.STATUS_PROCESS && (
                                 <span>
-                                    {FileItem.asHumanFileSize(this.props.file.getBytesUploaded())}
+                                    {FileItem.asHumanFileSize(this.props.file.bytesUploaded)}
                                     &nbsp;
                                     из
                                 </span>
                             )}
-                            {!this.props.file.isResultError() && (
+                            {!this.props.file.result === File.RESULT_ERROR && (
                                 <span>
                                     &nbsp;
-                                    {FileItem.asHumanFileSize(this.props.file.getBytesTotal())}
+                                    {FileItem.asHumanFileSize(this.props.file.bytesTotal)}
                                 </span>
                             )}
                         </p>
-                        {this.props.file.isStatusProcess() && (
+                        {this.props.file.status === File.STATUS_PROCESS && (
                             <div className='progress'>
                                 <div
                                     className='progress-bar'
                                     style={{
-                                        width: this.props.file.progress.getPercent() + '%'
+                                        width: this.props.file.progress.percent + '%'
                                     }}
                                 >
-                                    {this.props.file.progress.getPercent()}
+                                    {this.props.file.progress.percent}
                                     %
                                 </div>
                             </div>
@@ -92,11 +94,11 @@ export default class FileItem extends React.Component {
     }
 
     _renderPreview() {
-        if (!this.props.file.isStatusEnd() || !this.props.file.isResultSuccess()) {
+        if (!this.props.file.status === File.STATUS_END || !this.props.file.result === File.RESULT_SUCCESS) {
             return null;
         }
 
-        var response = this.props.file.getResultHttpMessage();
+        var response = this.props.file.resultHttpMessage;
         if (!response || !response.previewImageUrl || !response.downloadUrl) {
             return null;
         }
@@ -107,7 +109,7 @@ export default class FileItem extends React.Component {
                     <img
                         className='media-object panel'
                         src={response.previewImageUrl}
-                        alt={this.props.file.getName()}
+                        alt={this.props.file.name}
                         style={{
                             width: 100,
                             height: 100,

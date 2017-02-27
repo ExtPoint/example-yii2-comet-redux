@@ -80,7 +80,6 @@ class ChatForm extends React.Component {
 
 }
 
-
 export default connect(
     (state, props) => ({
         initialValues: {

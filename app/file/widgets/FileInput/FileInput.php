@@ -19,6 +19,15 @@ class FileInputView extends AppWidget {
      * Renders the widget.
      */
     public function run() {
+        // TODO Convert data to fileup format
+        /*uid: data.uid,
+         path: data.title,
+         type: data.fileMimeType,
+         bytesUploaded: data.fileSize,
+         bytesUploadEnd: data.fileSize,
+         bytesTotal: data.fileSize,
+         resultHttpMessage: data,*/
+
         $options = ArrayHelper::merge($this->options, [
             'uploader' => [
                 'backendUrl' => Url::to($this->url)
