@@ -13,7 +13,6 @@ export default window.Chat = class Chat extends React.Component {
 
     static propTypes = {
         userName: PropTypes.string,
-        groupId: PropTypes.number.isRequired,
         pageSize: PropTypes.number.isRequired,
         preloadState: PropTypes.object.isRequired,
     };
@@ -35,8 +34,15 @@ export default window.Chat = class Chat extends React.Component {
         return (
             <Provider store={this.store}>
                 <div>
-                    <ChatForm userName={this.props.userName} groupId={this.props.groupId}/>
-                    <ChatList groupId={this.props.groupId} pageSize={this.props.pageSize} />
+                    <ChatForm userName={this.props.userName}/>
+                    <div className='row'>
+                        <div className='col-md-6'>
+                            <ChatList groupId={1} pageSize={this.props.pageSize}/>
+                        </div>
+                        <div className='col-md-6'>
+                            <ChatList groupId={2} pageSize={this.props.pageSize}/>
+                        </div>
+                    </div>
                 </div>
             </Provider>
         );

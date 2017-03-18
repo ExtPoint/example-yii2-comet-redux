@@ -52,14 +52,23 @@ class ChatForm extends React.Component {
                         name='photoUids'
                         component={FileInput}
                         buttonLabel='Прикрепить фотографии'
+                        initialFiles={[ ]}
                         multiple
                     />
                 </div>
-                <Field
-                    name='groupId'
-                    component='input'
-                    type='hidden'
-                />
+                <div className='form-group'>
+                    <label htmlFor={`${ChatForm.formId}_groupId`}>
+                        Группа&nbsp;
+                    </label>
+                    <Field
+                        id={`${ChatForm.formId}_groupId`}
+                        name='groupId'
+                        component='select'
+                    >
+                        <option value={1}>Left</option>
+                        <option value={2}>Right</option>
+                    </Field>
+                </div>
                 <button
                     type='submit'
                     className='btn btn-default'
@@ -83,7 +92,7 @@ class ChatForm extends React.Component {
 export default connect(
     (state, props) => ({
         initialValues: {
-            groupId: props.groupId,
+            groupId: 1,
             userName: props.userName || '',
         },
     })
