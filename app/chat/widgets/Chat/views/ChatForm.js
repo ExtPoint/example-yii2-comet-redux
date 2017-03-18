@@ -11,7 +11,6 @@ class ChatForm extends React.Component {
 
     static propTypes = {
         userName: PropTypes.string,
-        groupId: PropTypes.number.isRequired,
     };
 
     constructor() {

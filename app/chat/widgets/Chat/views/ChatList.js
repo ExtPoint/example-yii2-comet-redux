@@ -33,9 +33,11 @@ class ChatList extends React.Component {
                 limit: this.props.pageSize,
             });
             const collection = profile.getCollection(ChatList.bindingId);
+            const listId = ['list', ChatList.profileId, ChatList.bindingId, this.props.groupId].join('_');
+
             collection.desc = true;
             collection.callback = items => {
-                this.props.dispatch(update(ChatList.profileId, ChatList.bindingId, items));
+                this.props.dispatch(update(listId, items));
             };
 
             this.profile = profile;
@@ -87,6 +89,9 @@ class ChatList extends React.Component {
 export default connect(
     (state, props) => ({
         groupId: props.groupId,
-        messages: getCollection(state, ChatList.profileId, ChatList.bindingId),
+        messages: getCollection(
+            state,
+            ['list', ChatList.profileId, ChatList.bindingId, props.groupId].join('_')
+        ),
     })
 )(ChatList);

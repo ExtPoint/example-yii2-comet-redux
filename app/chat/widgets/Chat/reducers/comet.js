@@ -1,17 +1,11 @@
 import {COLLECTION_UPDATE} from '../actions/comet';
 
-const initialState = {
-};
-
-export default function content(state = initialState, action) {
+export default function content(state = {}, action) {
     switch (action.type) {
         case COLLECTION_UPDATE:
             return {
                 ...state,
-                [action.profileId]: {
-                    ...(state[action.profileId] || {}),
-                    [action.bindingId]: [].concat(action.items),
-                },
+                [action.listId]: [].concat(action.items),
             };
 
         default:
@@ -19,4 +13,4 @@ export default function content(state = initialState, action) {
     }
 }
 
-export const getCollection = (state, profileId, bindingId) => state.comet[profileId] && state.comet[profileId][bindingId] || [];
+export const getCollection = (state, listId) => state.comet[listId] || [];

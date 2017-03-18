@@ -1,8 +1,7 @@
 export const COLLECTION_UPDATE = 'COLLECTION_UPDATE';
 
-export const update = (profileId, bindingId, items) => ({
+export const update = (listId, items) => ({
     type: COLLECTION_UPDATE,
-    profileId,
-    bindingId,
+    listId,
     items,
 });
